@@ -8,6 +8,7 @@ function App() {
       <h1>Instagram</h1>
       <Post username="levischouten"/>
       <Post username="randomuser"/>
+      <Post username="ivoschouten"/>
     </div>
   );
 }

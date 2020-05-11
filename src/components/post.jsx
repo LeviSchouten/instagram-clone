@@ -15,7 +15,7 @@ const PostImage = styled.img`
 const PostContainer = styled.div`
   width: 600px;
   border: 1px solid #d5d5d5;
-  box-shadow: 5px 5px 5px #d5d5d5;
+  box-shadow: 2px 2px 5px #d5d5d5;
   margin: 30px;
 `;
 
@@ -36,25 +36,36 @@ const PostLikes = styled.p`
 `;
 
 const PostCommentSection = styled.div`
-  padding-left: 10px;
 `;
 
 const PostComment = styled.p`
+  padding-left: 10px;
 `;
 
-const comments = [
-  'first comment',
-  'second comment',
-  'third comment',
-  'third comment',
-  'third comment'
-]
+const PostLink = styled.p`
+  font-style: none;
+  color: #7a7a7a;
+  padding-left: 10px;
+`;
+
+const PostInput = styled.input`
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #d5d5d5;
+  height: 50px;
+  &::placeholder {
+    padding: 10px;   
+    font-size: 1.4em;
+  }
+`;
 
 function Post(props) {
   const { username } = props;
   return (
     <PostContainer>
-      <PostTitle>{username}</PostTitle>
+      <PostTitle><strong>{username}</strong></PostTitle>
       <PostImage src="https://picsum.photos/seed/picsum/600/600"></PostImage>
       <PostFooter>
         <PostActions>
@@ -65,6 +76,8 @@ function Post(props) {
         <PostCommentSection>
           <PostComment><strong>johndoe</strong> Love the picture!</PostComment>
           <PostComment><strong>janedoe</strong> obsessed!!</PostComment>
+          <PostLink><i>All 13 comments</i></PostLink>
+          <PostInput placeholder="Place a comment..."></PostInput>
         </PostCommentSection>
       </PostFooter>
     </PostContainer>
