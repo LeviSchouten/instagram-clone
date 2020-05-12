@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 
-function Register() {
+function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3002/register', {
+    fetch('http://localhost:3002/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email, password, name}),
+      body: JSON.stringify({email, password}),
     }).then(res => res.text()).then(text => {
       console.log(text);
       setPassword('')
       setEmail('');
-      setName('');
     })
     // console.log(email, password);
   }
@@ -32,13 +30,6 @@ function Register() {
           onChange={e=>setEmail(e.target.value)}/>
       </label>
       <label>
-        Name:
-        <input 
-          type="text" 
-          value={name} 
-          onChange={e=>setName(e.target.value)}/>
-      </label>
-      <label>
         Password:
         <input 
           type="password" 
@@ -50,4 +41,4 @@ function Register() {
   )
 }
 
-export default Register;
+export default Login;
