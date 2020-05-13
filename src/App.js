@@ -13,6 +13,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/upload" component={Upload} />
+          <Route path="/signup" component={Register} />
         </Switch>
       </Router>
       {/* <Upload />

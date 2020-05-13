@@ -97,7 +97,6 @@ function Upload() {
           <TextField
             id="standard-multiline-static"
             label="description"
-            // variant="outlined"
             multiline
             rows={2}
             onChange={e => setDescription(e.target.value)}

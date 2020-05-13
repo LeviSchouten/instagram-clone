@@ -9,9 +9,6 @@ const theme = createMuiTheme({
       contrastText: "#fff"
     }
   },
-  status: {
-    danger: "orange"
-  },
   spacing: value => value * 2
 });
 
