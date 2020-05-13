@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Register() {
+const Register = () => {
   const classes = useStyles();
 
   const [password, setPassword] = useState("");
@@ -37,12 +37,12 @@ function Register() {
       },
       body: JSON.stringify({ email, password, name })
     })
-      .then(res => res.text())
-      .then(text => {
-        console.log(text);
+      .then(res => res.json())
+      .then(id => {
         setPassword("");
         setEmail("");
         setName("");
+        setCheckPassword("");
       });
   };
 
@@ -88,6 +88,6 @@ function Register() {
       </Button>
     </Card>
   );
-}
+};
 
 export default Register;

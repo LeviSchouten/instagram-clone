@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   }
 });
 
-function Upload() {
+const Upload = () => {
   const classes = useStyles();
 
   const [file, setFile] = useState("");
@@ -40,7 +40,7 @@ function Upload() {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("email", "example123@gmail.com");
+    formData.append("user_id", "668d7baf-efd7-410c-8055-e1cebe986b");
     formData.append("description", description);
 
     fetch("http://localhost:5000/upload", {
@@ -113,6 +113,6 @@ function Upload() {
       </Card>
     </Box>
   );
-}
+};
 
 export default Upload;
