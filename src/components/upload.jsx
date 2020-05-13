@@ -1,45 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { CloudUpload } from "@material-ui/icons";
+import {
+  makeStyles,
+  Card,
+  CardMedia,
+  Button,
+  TextField,
+  Box,
+  CardContent
+} from "@material-ui/core";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 300,
+    width: 300
+  },
+  media: {
+    height: 350,
+    justifyContent: "center",
+    width: "100%",
+    padding: 0
+  },
+  buttons: {
+    margin: 10,
+    marginTop: 0,
+    float: "right"
+  }
+});
 
 function Upload() {
-  const [file, setFile] = useState('');
-  const [fileName, setFileName] = useState('');
+  const classes = useStyles();
+
+  const [file, setFile] = useState("");
+  const [previewURL, setPreviewURL] = useState(null);
+  const [description, setDescription] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('email', 'example@gmail.com');
-    formData.append('description', 'some description text..');
+    formData.append("file", file);
+    formData.append("email", "example123@gmail.com");
+    formData.append("description", description);
 
-    fetch('http://localhost:5000/upload', {
-      method: 'POST',
+    fetch("http://localhost:5000/upload", {
+      method: "POST",
       body: formData
     })
       .then(data => data.json())
       .then(console.log)
-      .catch(console.error)
-    console.log(file);
-  }
+      .catch(console.error);
+  };
 
   const handleChange = e => {
     e.preventDefault();
-    setFile(e.target.files[0]);
-    setFileName(e.target.value);
-  }
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    reader.onloadend = () => {
+      setFile(file);
+      setPreviewURL(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Photo:
-        <input 
-          type="file"
-          value={fileName} 
-          onChange={handleChange}/>
-      </label>
-      <input type="submit" value="Submit"/>
-    </form>
-  )
+    <Box display="flex" flexDirection="row" p={10}>
+      <Card className={classes.root}>
+        <Button
+          color="primary"
+          startIcon={previewURL ? "" : <CloudUpload />}
+          component="label"
+          size="large"
+          className={classes.media}
+        >
+          {previewURL ? (
+            <CardMedia
+              className={classes.media}
+              image={previewURL}
+              title="Contemplative Reptile"
+            />
+          ) : (
+            "Upload"
+          )}
+          <input
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleChange}
+          />
+        </Button>
+        <CardContent>
+          <TextField
+            id="standard-multiline-static"
+            label="description"
+            // variant="outlined"
+            multiline
+            rows={2}
+            onChange={e => setDescription(e.target.value)}
+            style={{ width: "100%" }}
+          />
+        </CardContent>
+        <Button
+          color="primary"
+          onClick={handleSubmit}
+          className={classes.buttons}
+        >
+          Submit
+        </Button>
+      </Card>
+    </Box>
+  );
 }
 
 export default Upload;
