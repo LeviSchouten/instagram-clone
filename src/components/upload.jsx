@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { CloudUpload } from "@material-ui/icons";
 import {
   makeStyles,
@@ -35,20 +36,22 @@ const Upload = () => {
   const [previewURL, setPreviewURL] = useState(null);
   const [description, setDescription] = useState("");
 
+  const history = useHistory();
+
   const handleSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("user_id", "668d7baf-efd7-410c-8055-e1cebe986b");
+    formData.append("user_id", "668d7baf-efd7-410c-8055-e1cebe986bcf");
     formData.append("description", description);
 
-    fetch("http://localhost:5000/upload", {
+    fetch("/upload", {
       method: "POST",
       body: formData
     })
       .then(data => data.json())
-      .then(console.log)
+      .then(() => history.push("/"))
       .catch(console.error);
   };
 
