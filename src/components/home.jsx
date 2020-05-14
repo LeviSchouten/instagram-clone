@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     fetch(url + "/posts")
       .then(data => data.json())
-      .then(data => setPosts(data.posts));
+      .then(data => setPosts(data.posts.reverse()));
   }, []);
 
   const generatePosts = () =>
