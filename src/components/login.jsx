@@ -14,6 +14,7 @@ function Login() {
     e.preventDefault();
     fetch(url + "/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
