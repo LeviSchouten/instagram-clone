@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
+import url from "../url";
+
 function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch("/login", {
+    fetch(url + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

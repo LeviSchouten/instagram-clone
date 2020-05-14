@@ -32,6 +32,8 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
 
+  console.log(process.env.NODE_ENV);
+
   return (
     <div className="App">
       <Router>

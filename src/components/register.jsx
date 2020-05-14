@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Card, Button, TextField, makeStyles } from "@material-ui/core";
 
+import url from "../url";
+
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -30,7 +32,7 @@ const Register = () => {
     console.log("submitted");
 
     if (password !== checkPassword) return;
-    fetch("/register", {
+    fetch(url + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

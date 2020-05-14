@@ -11,6 +11,8 @@ import {
   CardContent
 } from "@material-ui/core";
 
+import url from "../url";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
@@ -46,7 +48,7 @@ const Upload = () => {
     formData.append("user_id", "668d7baf-efd7-410c-8055-e1cebe986bcf");
     formData.append("description", description);
 
-    fetch("/upload", {
+    fetch(url + "/upload", {
       method: "POST",
       body: formData
     })
