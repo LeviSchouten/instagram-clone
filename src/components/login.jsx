@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import UserContext from "../UserContext";
 
 import url from "../url";
@@ -7,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  // console.log(useContext(UserContext));
+  const history = useHistory();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -19,9 +20,8 @@ function Login() {
       body: JSON.stringify({ email, password })
     })
       .then(res => res.json())
-      .then(res => {
-        setPassword("");
-        setEmail("");
+      .then(() => {
+        history.push("/");
       });
   };
 

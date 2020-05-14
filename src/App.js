@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
+import Cookies from "js-cookie";
 
 import Home from "./components/home";
 import Register from "./components/register";
@@ -37,6 +38,11 @@ function App() {
 
   const [user, setUser] = useState(null);
 
+  const handleLogout = () => {
+    Cookies.remove("user", { path: "/" });
+    setUser(null);
+  };
+
   return (
     <div className="App">
       <UserContext.Provider value={user}>
@@ -46,15 +52,26 @@ function App() {
               <Link to="/" className={classes.link}>
                 HOME
               </Link>
-              <Link to="/signup" className={classes.link}>
-                SIGN UP
-              </Link>
-              <Link to="/signin" className={classes.link}>
-                SIGN IN
-              </Link>
-              <Link to="/upload" className={classes.link}>
-                POST
-              </Link>
+              {!user && (
+                <Link to="/signup" className={classes.link}>
+                  SIGN UP
+                </Link>
+              )}
+              {!user && (
+                <Link to="/signin" className={classes.link}>
+                  SIGN IN
+                </Link>
+              )}
+              {user && (
+                <Link to="/upload" className={classes.link}>
+                  POST
+                </Link>
+              )}
+              {user && (
+                <Link className={classes.link} onClick={handleLogout}>
+                  SIGN OUT
+                </Link>
+              )}
             </Toolbar>
           </AppBar>
           <Switch>

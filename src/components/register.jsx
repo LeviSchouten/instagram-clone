@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Card, Button, TextField, makeStyles } from "@material-ui/core";
-import UserContext from "../UserContext";
 
 import url from "../url";
 
@@ -22,9 +22,9 @@ const useStyles = makeStyles({
 });
 
 const Register = () => {
-  console.log(useContext(UserContext));
-
   const classes = useStyles();
+
+  const history = useHistory();
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -32,8 +32,6 @@ const Register = () => {
   const [checkPassword, setCheckPassword] = useState("");
 
   const handleSubmit = () => {
-    console.log("submitted");
-
     if (password !== checkPassword) return;
     fetch(url + "/register", {
       method: "POST",
@@ -43,11 +41,8 @@ const Register = () => {
       body: JSON.stringify({ email, password, name })
     })
       .then(res => res.json())
-      .then(id => {
-        setPassword("");
-        setEmail("");
-        setName("");
-        setCheckPassword("");
+      .then(() => {
+        history.push("/signin");
       });
   };
 

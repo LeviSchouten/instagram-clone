@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { CloudUpload } from "@material-ui/icons";
 import {
@@ -10,6 +10,7 @@ import {
   Box,
   CardContent
 } from "@material-ui/core";
+import UserContext from "../UserContext";
 
 import url from "../url";
 
@@ -34,6 +35,8 @@ const useStyles = makeStyles({
 const Upload = () => {
   const classes = useStyles();
 
+  const { id } = useContext(UserContext);
+
   const [file, setFile] = useState("");
   const [previewURL, setPreviewURL] = useState(null);
   const [description, setDescription] = useState("");
@@ -45,7 +48,7 @@ const Upload = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("user_id", "1c7d62d9-24fa-48cf-a7ed-242ce726a996");
+    formData.append("user_id", id);
     formData.append("description", description);
 
     fetch(url + "/upload", {
