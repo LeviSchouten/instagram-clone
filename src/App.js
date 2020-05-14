@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
+import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 
 import Home from "./components/home";
 import Register from "./components/register";
 import Login from "./components/login";
 import Upload from "./components/upload";
+import UserContext from "./UserContext";
+
 import "./App.css";
+// import { ThemeContext } from "styled-components";
 
 const useStyles = makeStyles({
   appBar: {
@@ -32,35 +35,38 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
 
-  console.log(process.env.NODE_ENV);
+  const [user, setUser] = useState(null);
 
   return (
     <div className="App">
-      <Router>
-        <AppBar position="static" className={classes.appBar}>
-          <Toolbar>
-            {/* <Typography color="secondary"> */}
-            <Link to="/" className={classes.link}>
-              HOME
-            </Link>
-            <Link to="/signup" className={classes.link}>
-              SIGN UP
-            </Link>
-            <Link to="/singin" className={classes.link}>
-              SIGN IN
-            </Link>
-            <Link to="/upload" className={classes.link}>
-              POST
-            </Link>
-            {/* </Typography> */}
-          </Toolbar>
-        </AppBar>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/upload" component={Upload} />
-          <Route path="/signup" component={Register} />
-        </Switch>
-      </Router>
+      <UserContext.Provider value={user}>
+        <Router>
+          <AppBar position="static" className={classes.appBar}>
+            <Toolbar>
+              <Link to="/" className={classes.link}>
+                HOME
+              </Link>
+              <Link to="/signup" className={classes.link}>
+                SIGN UP
+              </Link>
+              <Link to="/signin" className={classes.link}>
+                SIGN IN
+              </Link>
+              <Link to="/upload" className={classes.link}>
+                POST
+              </Link>
+            </Toolbar>
+          </AppBar>
+          <Switch>
+            <Route exact path="/">
+              <Home handleLogin={setUser} />
+            </Route>
+            <Route path="/upload" component={Upload} />
+            <Route path="/signup" component={Register} />
+            <Route path="/signin" component={Login} />
+          </Switch>
+        </Router>
+      </UserContext.Provider>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Card, Button, TextField, makeStyles } from "@material-ui/core";
+import UserContext from "../UserContext";
 
 import url from "../url";
 
@@ -21,6 +22,8 @@ const useStyles = makeStyles({
 });
 
 const Register = () => {
+  console.log(useContext(UserContext));
+
   const classes = useStyles();
 
   const [password, setPassword] = useState("");

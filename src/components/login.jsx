@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../UserContext";
 
 import url from "../url";
 
 function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+
+  // console.log(useContext(UserContext));
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -15,13 +18,11 @@ function Login() {
       },
       body: JSON.stringify({ email, password })
     })
-      .then(res => res.text())
-      .then(text => {
-        console.log(text);
+      .then(res => res.json())
+      .then(res => {
         setPassword("");
         setEmail("");
       });
-    // console.log(email, password);
   };
 
   return (
