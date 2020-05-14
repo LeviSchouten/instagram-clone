@@ -32,7 +32,7 @@ const Register = () => {
     console.log("submitted");
 
     if (password !== checkPassword) return;
-    fetch(url + "register", {
+    fetch(url + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

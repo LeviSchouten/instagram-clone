@@ -8,7 +8,7 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch(url + "login", {
+    fetch(url + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
