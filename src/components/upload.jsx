@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 const Upload = () => {
   const classes = useStyles();
 
-  const { id } = useContext(UserContext);
+  const id = useContext(UserContext);
 
   const [file, setFile] = useState("");
   const [previewURL, setPreviewURL] = useState(null);

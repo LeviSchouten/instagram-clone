@@ -8,8 +8,8 @@ const Home = ({ handleLogin }) => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    const user = Cookies.get("user");
-    if (user) handleLogin(JSON.parse(user.substring(2))); // write redirect on login page and use name and id from useContext in post section
+    const user = localStorage.getItem("id");
+    if (user) handleLogin(user); // write redirect on login page and use name and id from useContext in post section
     fetch(url + "/posts")
       .then(data => data.json())
       .then(data => setPosts(data.posts.reverse()));

@@ -39,7 +39,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   const handleLogout = () => {
-    Cookies.remove("user", { path: "/" });
+    localStorage.clear();
     setUser(null);
   };
 

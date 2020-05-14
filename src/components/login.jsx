@@ -20,7 +20,8 @@ function Login() {
       body: JSON.stringify({ email, password })
     })
       .then(res => res.json())
-      .then(() => {
+      .then(res => {
+        localStorage.setItem("id", res.id);
         history.push("/");
       });
   };
