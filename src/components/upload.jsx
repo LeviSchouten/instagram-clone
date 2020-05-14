@@ -48,7 +48,7 @@ const Upload = () => {
     formData.append("user_id", "668d7baf-efd7-410c-8055-e1cebe986bcf");
     formData.append("description", description);
 
-    fetch(url + "/upload", {
+    fetch(url + "upload", {
       method: "POST",
       body: formData
     })
